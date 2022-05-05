@@ -1,4 +1,4 @@
-const minutosFuncionamentoBanco = 30;
+const minutosFuncionamentoBanco = 6;
 const quantidadeMaximaFila = 3;
 const filaClientes = [];
 let clientesNaoAtendidos = 0;
@@ -28,6 +28,12 @@ for (let i = 1; i <= minutosFuncionamentoBanco; i++) {
       clientesNaoAtendidos = clientesNaoAtendidos + 1;
     }
   }
+
+  if (gerarNumeroAleatorio() === 1) {
+    console.log("pode desocupar o caixa");
+    filaClientes.shift();
+  }
+
   console.log("quantidade atual da fila", filaClientes.length);
 }
 
