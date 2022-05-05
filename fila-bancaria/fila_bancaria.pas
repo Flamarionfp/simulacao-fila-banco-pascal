@@ -1,6 +1,6 @@
 program fila_bancaria;
 
-uses crt;
+uses crt, Filas;
 
 begin
   writeln('Hello World');
