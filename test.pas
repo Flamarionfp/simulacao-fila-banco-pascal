@@ -13,33 +13,34 @@ begin
   Randomize;
   cannot_be_attended := 0;
   hasOperationDone := false;
-
   
   for i := 1 to bank_work_time_in_minutes do
     begin
-      if random(2) = 0 then
+      if random(3) = 0 then
         begin
+           writeln('Chegou um cliente');
           if not QisFull(F) then
             begin
               if QisEmpty(F) or hasOperationDone = true then
                 begin
-                  writeln('caixa livre para uso');
+                  writeln('caixa disponivel, o cliente pode usar');
                   F.memo[1] := i;
                   hasOperationDone := false;
-                  if F.total = 0 then
-                    inc(F.total);
+                  inc(F.total);
                 end
               else
               begin
-                writeln('caixa ocupado, mas tem espaco na fila');
+                writeln('caixa esta ocupado, pode entrar na fila');
                 Enqueue(F, i)
               end; 
             end
           else 
             begin
-              writeln('banco cheio!');
+              writeln('banco cheio');
               inc(cannot_be_attended);
             end;
+
+          writeln('quantidade atual da fila ', F.total  - 1);
           
           if random(2) = 1 then
             begin
