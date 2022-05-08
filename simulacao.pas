@@ -1,15 +1,15 @@
 program fila_bancaria;
 
-uses SysUtils, Filas;
+uses Filas;
 
 const bank_work_time_in_minutes = 360;
 
-var F : Fila; 
+var people_in_bank : Fila; 
 var cannot_be_attended, sortedNumber, i : integer; 
 var hasOperationDone : boolean;
 
 begin
-  Qinit(F);
+  Qinit(people_in_bank);
   Randomize;
   cannot_be_attended := 0;
   hasOperationDone := false;
@@ -18,20 +18,20 @@ begin
     begin
       if random(3) = 0 then
         begin
-           writeln('Chegou um cliente');
-          if not QisFull(F) then
+          writeln('Chegou um cliente');
+          if not QisFull(people_in_bank) then
             begin
-              if QisEmpty(F) or hasOperationDone = true then
+              if QisEmpty(people_in_bank) or hasOperationDone = true then
                 begin
                   writeln('caixa disponivel, o cliente pode usar');
-                  F.memo[1] := i;
+                  people_in_bank.memo[1] := i;
                   hasOperationDone := false;
-                  inc(F.total);
+                  inc(people_in_bank.total);
                 end
               else
               begin
                 writeln('caixa esta ocupado, pode entrar na fila');
-                Enqueue(F, i)
+                Enqueue(people_in_bank, i)
               end; 
             end
           else 
@@ -40,12 +40,12 @@ begin
               inc(cannot_be_attended);
             end;
 
-          writeln('quantidade atual da fila ', F.total  - 1);
+          writeln('quantidade de clientes na fila ', people_in_bank.total  - 1);
           
-          if random(2) = 1 then
+          if random(4) = 1 then
             begin
               writeln('cliente saiu do caixa. Agora o caixa esta disponivel');
-              Dequeue(F);
+              Dequeue(people_in_bank);
               hasOperationDone := true;
             end; 
         end;

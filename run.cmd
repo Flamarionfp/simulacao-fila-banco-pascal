@@ -4,8 +4,8 @@ cls
 
 fpc Filas.pas
 pause
-fpc fila_bancaria.pas
-fila_bancaria.exe
+fpc simulacao.pas
+simulacao.exe
 pause
 
 cls
