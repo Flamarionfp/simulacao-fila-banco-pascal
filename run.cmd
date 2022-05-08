@@ -2,8 +2,10 @@
 
 cls
 
+fpc Filas.pas
+pause
 fpc fila_bancaria.pas
-fpc fila_bancaria.pas
+fila_bancaria.exe
 pause
 
-fila_bancaria.exe
+cls
