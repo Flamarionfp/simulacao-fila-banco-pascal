@@ -1,8 +1,8 @@
 program fila_bancaria;
 
-uses crt, SysUtils, Filas;
+uses SysUtils, Filas;
 
-const bank_work_time_in_minutes = 15;
+const bank_work_time_in_minutes = 360;
 
 var F : Fila; 
 var cannot_be_attended, sortedNumber, i : integer; 
@@ -17,32 +17,37 @@ begin
   
   for i := 1 to bank_work_time_in_minutes do
     begin
-      if not QisFull(F) then
+      if random(2) = 0 then
         begin
-           if QisEmpty(F) then
+          if not QisFull(F) then
             begin
-              writeln('caixa livre para uso');
-              F.memo[1] := i;
-              hasOperationDone := true;
-              inc(F.total)
+              if QisEmpty(F) or hasOperationDone = true then
+                begin
+                  writeln('caixa livre para uso');
+                  F.memo[1] := i;
+                  hasOperationDone := false;
+                  if F.total = 0 then
+                    inc(F.total);
+                end
+              else
+              begin
+                writeln('caixa ocupado, mas tem espaco na fila');
+                Enqueue(F, i)
+              end; 
             end
-          else
-          begin
-            writeln('caixa ocupado, mas tem espaco na fila');
-            Enqueue(F, i)
-          end; 
-        end
-      else 
-        begin
-          writeln('banco cheio!');
-          inc(cannot_be_attended);
+          else 
+            begin
+              writeln('banco cheio!');
+              inc(cannot_be_attended);
+            end;
+          
+          if random(2) = 1 then
+            begin
+              writeln('cliente saiu do caixa. Agora o caixa esta disponivel');
+              Dequeue(F);
+              hasOperationDone := true;
+            end; 
         end;
-      
-      if random(3) = 1 then
-        begin
-          writeln('cliente terminou a operação, caixa disponivel');
-          Dequeue(F);
-        end; 
     end;
 
     writeln(cannot_be_attended, ' pessoas nao puderam entrar no banco por causa da super lotacao.')
