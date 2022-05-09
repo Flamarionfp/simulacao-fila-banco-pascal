@@ -5,7 +5,7 @@ uses Filas;
 const bank_work_time_in_minutes = 360;
 
 var people_in_bank : Fila; 
-var cannot_be_attended, sortedNumber, i : integer; 
+var cannot_be_attended, i : integer; 
 var hasOperationDone : boolean;
 
 begin
@@ -40,7 +40,7 @@ begin
               inc(cannot_be_attended);
             end;
 
-          // writeln('quantidade de clientes na fila ', people_in_bank.total  - 1);
+         
           
           if random(4) = 1 then
             begin
@@ -51,6 +51,7 @@ begin
         end;
     end;
 
-    writeln(cannot_be_attended, ' pessoas nao puderam entrar no banco por causa da super lotacao.')
-     
+    writeln(cannot_be_attended, ' pessoas nao puderam entrar no banco por causa da super lotacao.');
+    writeln('quantidade de clientes na fila ', people_in_bank.total  - 1);
+
 end.
