@@ -18,33 +18,33 @@ begin
     begin
       if random(3) = 0 then
         begin
-          writeln('Chegou um cliente');
+          // writeln('Chegou um cliente');
           if not QisFull(people_in_bank) then
             begin
               if QisEmpty(people_in_bank) or hasOperationDone = true then
                 begin
-                  writeln('caixa disponivel, o cliente pode usar');
+                  // writeln('caixa disponivel, o cliente pode usar');
                   people_in_bank.memo[1] := i;
                   hasOperationDone := false;
                   inc(people_in_bank.total);
                 end
               else
               begin
-                writeln('caixa esta ocupado, pode entrar na fila');
+                // writeln('caixa esta ocupado, pode entrar na fila');
                 Enqueue(people_in_bank, i)
               end; 
             end
           else 
             begin
-              writeln('banco cheio');
+              // writeln('banco cheio');
               inc(cannot_be_attended);
             end;
 
-          writeln('quantidade de clientes na fila ', people_in_bank.total  - 1);
+          // writeln('quantidade de clientes na fila ', people_in_bank.total  - 1);
           
           if random(4) = 1 then
             begin
-              writeln('cliente saiu do caixa. Agora o caixa esta disponivel');
+              // writeln('cliente saiu do caixa. Agora o caixa esta disponivel');
               Dequeue(people_in_bank);
               hasOperationDone := true;
             end; 
